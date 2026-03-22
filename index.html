@@ -3,80 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhanu Auto Parts & Service Centre</title>
+    <title>Bhanu Auto Parts & Service</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #e31e24; /* Racing Red */
-            --dark: #1a1a1a;    /* Tire Black */
-            --accent: #ffcc00;  /* Warning Yellow */
-        }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fdfdfd; color: var(--dark); }
-        header { background: var(--dark); color: white; padding: 25px 15px; border-bottom: 4px solid var(--primary); text-align: center; }
-        h1 { margin: 0; font-size: 1.5rem; text-transform: uppercase; }
-        .tagline { color: var(--accent); font-size: 0.8rem; margin-top: 5px; font-weight: bold; }
-
-        .menu-grid { padding: 20px; display: grid; gap: 15px; max-width: 500px; margin: auto; }
+        :root { --red: #e31e24; --black: #1a1a1a; --yellow: #ffcc00; }
+        body { font-family: sans-serif; margin: 0; background: #f4f4f4; text-align: center; }
+        header { background: var(--black); color: white; padding: 20px; border-bottom: 4px solid var(--red); }
+        .tagline { color: var(--yellow); font-size: 14px; font-weight: bold; margin-top: 5px; }
         
-        .cat-card {
-            background: white; border-radius: 12px; padding: 18px;
+        /* Menu Buttons */
+        .container { padding: 20px; max-width: 500px; margin: auto; }
+        .box { 
+            background: white; margin-bottom: 15px; padding: 20px; border-radius: 12px;
             display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-left: 6px solid var(--primary);
-            cursor: pointer; transition: 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-left: 6px solid var(--red);
+            cursor: pointer;
         }
-        .cat-card:active { transform: scale(0.96); }
-        .info { display: flex; align-items: center; gap: 15px; }
-        .info i { font-size: 1.6rem; color: var(--primary); }
-        .info h3 { margin: 0; font-size: 1.1rem; }
+        .box i { font-size: 24px; color: var(--red); }
+        .box h3 { margin: 0; font-size: 18px; flex-grow: 1; margin-left: 15px; text-align: left; }
 
-        /* Gallery System */
-        #gallery-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 999; overflow-y: auto; }
-        .nav-bar { background: var(--dark); color: white; padding: 15px; display: flex; align-items: center; position: sticky; top: 0; }
-        .back-btn { background: var(--primary); color: white; border: none; padding: 8px 12px; border-radius: 5px; margin-right: 15px; cursor: pointer; }
+        /* Full Screen Gallery */
+        #gallery { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: white; z-index: 1000; overflow-y: auto; 
+        }
+        .nav { background: var(--black); color: white; padding: 15px; display: flex; align-items: center; position: sticky; top: 0; }
+        .back { background: var(--red); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
         
-        .media-container { padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .media-container img, .media-container video { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .grid img, .grid video { width: 100%; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: 180px; object-fit: cover; }
         
-        .footer { padding: 20px; text-align: center; background: #eee; margin-top: 30px; }
-        .call-btn { background: #25d366; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 10px; }
+        .footer { padding: 20px; background: #ddd; margin-top: 20px; font-weight: bold; }
+        .wa-link { color: #25d366; text-decoration: none; font-size: 20px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>BHANU AUTO PARTS</h1>
-    <div class="tagline">BEST SERVICE • GENUINE PARTS • EXPERT REPAIRING</div>
+    <div class="tagline">ENGINE SPECIALIST • SPARE PARTS • REPAIRING</div>
 </header>
 
-<div class="menu-grid">
-    <div class="cat-card" onclick="openGallery('parts', 'Genuine Spare Parts')">
-        <div class="info">
-            <i class="fas fa-oil-can"></i>
-            <h3>Parts & Oil</h3>
-        </div>
-        <i class="fas fa-chevron-right"></i>
+<div class="container">
+    <div class="box" onclick="show('parts', 'Genuine Spare Parts', 5)">
+        <i class="fas fa-cogs"></i>
+        <h3>Spare Parts & Oil</h3>
+        <i class="fas fa-arrow-right"></i>
     </div>
 
-    <div class="cat-card" onclick="openGallery('service', 'Repairing & Service')">
-        <div class="info">
-            <i class="fas fa-tools"></i>
-            <h3>Service & Repairs</h3>
-        </div>
-        <i class="fas fa-chevron-right"></i>
+    <div class="box" onclick="show('service', 'Service & Repairing', 4)">
+        <i class="fas fa-tools"></i>
+        <h3>Service Work</h3>
+        <i class="fas fa-arrow-right"></i>
     </div>
 
-    <div class="cat-card" onclick="openGallery('accessories', 'Bike Accessories')">
-        <div class="info">
-            <i class="fas fa-lightbulb"></i>
-            <h3>Accessories</h3>
-        </div>
-        <i class="fas fa-chevron-right"></i>
+    <div class="box" onclick="show('accessories', 'Bike Accessories', 3)">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Accessories</h3>
+        <i class="fas fa-arrow-right"></i>
     </div>
 </div>
 
-<div id="gallery-view">
-    <div class="nav-bar">
-        <button class="back-btn" onclick="closeGallery()"><i class="fas fa-arrow-left"></i></button>
-        <span id="title">Category Name</span>
-    </div>
-    <div class="media-container" id="media-list">
+<div id="gallery">
+    <div class="nav">
+        <button class="back" onclick="hide()">← BACK</button>
+        <span id="g-title" style="margin-left: 20
