@@ -3,78 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiyaji Aluminium Fabrication</title>
+    <title>Jiyaji Aluminium & Glass Fabrication</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; text-align: center; }
-        h1 { color: #333; }
-        .category-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; cursor: pointer; transition: 0.3s; }
-        .card:hover { transform: scale(1.05); }
-        .card img { width: 100%; border-radius: 10px; }
-        .gallery { display: none; margin-top: 20px; background: white; padding: 20px; border-radius: 15px; }
-        .gallery img, .gallery video { width: 90%; max-width: 400px; margin: 10px; border-radius: 10px; border: 2px solid #ddd; }
-        .back-btn { background: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
+        :root {
+            --primary: #2c3e50; /* Dark Metallic Gray */
+            --accent: #e67e22;  /* Professional Orange */
+            --bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            text-align: center;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        p { margin: 5px 0 0; opacity: 0.9; }
+
+        /* Categories Section */
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            border-left: 5px solid var(--accent);
+        }
+
+        .category-card:active { transform: scale(0.98); }
+
+        .category-info { display: flex; align-items: center; gap: 15px; }
+        .category-info i { font-size: 1.5rem; color: var(--primary); }
+        .category-info h3 { margin: 0; font-size: 1.1rem; }
+
+        /* Gallery Overlay */
+        #gallery-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        .gallery-header {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .media-grid img, .media-grid video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .contact-footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eee;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Jiyaji Aluminium & Glass Work</h1>
-    <p>Scanner scan karke hamara kaam dekhein</p>
+    <header>
+        <h1>Jiyaji Aluminium Work</h1>
+        <p>Expert Fabrication & Glass Solutions</p>
+    </header>
 
-    <div id="main-menu" class="category-container">
-        <div class="card" onclick="showGallery('aluminum-normal')">
-            <img src="assets/aluminum-normal/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Aluminum+Normal'">
-            <h3>Aluminum Normal</h3>
+    <div class="container" id="menu">
+        <div class="category-card" onclick="openGallery('aluminum-normal', 'Normal Aluminum')">
+            <div class="category-info">
+                <i class="fas fa-window-maximize"></i>
+                <h3>Aluminum Normal</h3>
+            </div>
+            <i class="fas fa-chevron-right"></i>
         </div>
-        <div class="card" onclick="showGallery('domal-section')">
-            <img src="assets/domal-section/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Domal+Section'">
-            <h3>Domal Section</h3>
+
+        <div class="category-card" onclick="openGallery('domal-section', 'Domal Premium')">
+            <div class="category-info">
+                <i class="fas fa-door-open"></i>
+                <h3>Domal Section</h3>
+            </div>
+            <i class="fas fa-chevron-right"></i>
         </div>
-        <div class="card" onclick="showGallery('glass-work')">
-            <img src="assets/glass-work/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Glass+Work'">
-            <h3>Glass & Railing</h3>
+
+        <div class="category-card" onclick="openGallery('glass-work', 'Glass & Railing')">
+            <div class="category-info">
+                <i class="fas fa-layer-group"></i>
+                <h3>Glass & Railing Work</h3>
+            </div>
+            <i class="fas fa-chevron-right"></i>
         </div>
     </div>
 
-    <div id="gallery-view" class="gallery">
-        <button class="back-btn" onclick="goBack()">← Back to Menu</button>
-        <h2 id="gallery-title"></h2>
-        <div id="media-list">
+    <div id="gallery-overlay">
+        <div class="gallery-header">
+            <button class="back-btn" onclick="closeGallery()"><i class="fas fa-arrow-left"></i> Back</button>
+            <h2 id="gallery-title" style="margin-left: 20px;"></h2>
+        </div>
+        <div class="media-grid" id="media-list">
             </div>
     </div>
 
-    <script>
-        function showGallery(category) {
-            document.getElementById('main-menu').style.display = 'none';
-            document.getElementById('gallery-view').style.display = 'block';
-            document.getElementById('gallery-title').innerText = category.replace('-', ' ').toUpperCase();
-            
-            let mediaList = document.getElementById('media-list');
-            mediaList.innerHTML = ''; // Pehle wala saaf karein
+    <div class="contact-footer">
+        <p>Hamara kaam pasand aaya? Call karein:</p>
+        <a href="tel:+919000000000" style="color: var(--accent); text-decoration: none; font-weight: bold; font-size: 1.2rem;">+91 9XXXX XXXXX</a>
+    </div>
 
-            // Yahan aapko apni file ke naam likhne honge jo aapne upload kiye hain
+    <script>
+        function openGallery(folder, title) {
+            document.getElementById('gallery-overlay').style.display = 'block';
+            document.getElementById('gallery-title').innerText = title;
+            
+            const mediaList = document.getElementById('media-list');
+            mediaList.innerHTML = '<p>Loading photos...</p>';
+
+            // IMPORTANT: List your actual filenames here for each category
             let files = [];
-            if(category === 'aluminum-normal') {
-                files = ['normal-1.jpg', 'normal-2.mp4']; // Example names
-            } else if(category === 'domal-section') {
-                files = ['domal-1.jpg', 'domal-2.jpg'];
-            } else if(category === 'glass-work') {
-                files = ['glass-1.jpg', 'glass-video.mp4'];
+            if(folder === 'aluminum-normal') {
+                files = ['img1.jpg', 'vid1.mp4']; // Add your actual names
+            } else if(folder === 'domal-section') {
+                files = ['domal1.jpg', 'domal2.jpg']; 
+            } else if(folder === 'glass-work') {
+                files = ['glass1.jpg'];
             }
 
+            mediaList.innerHTML = ''; 
             files.forEach(file => {
-                let path = `assets/${category}/${file}`;
-                if(file.endsWith('.mp4')) {
-                    mediaList.innerHTML += `<video controls src="${path}"></video>`;
+                const path = `assets/${folder}/${file}`;
+                if(file.toLowerCase().endsWith('.mp4')) {
+                    mediaList.innerHTML += `<video controls><source src="${path}" type="video/mp4"></video>`;
                 } else {
-                    mediaList.innerHTML += `<img src="${path}">`;
+                    mediaList.innerHTML += `<img src="${path}" alt="work">`;
                 }
             });
         }
 
-        function goBack() {
-            document.getElementById('main-menu').style.display = 'flex';
-            document.getElementById('gallery-view').style.display = 'none';
+        function closeGallery() {
+            document.getElementById('gallery-overlay').style.display = 'none';
         }
     </script>
 </body>
