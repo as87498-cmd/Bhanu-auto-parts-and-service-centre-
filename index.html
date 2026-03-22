@@ -3,193 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiyaji Aluminium & Glass Fabrication</title>
+    <title>Bhanu Auto Parts & Service Centre</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50; /* Dark Metallic Gray */
-            --accent: #e67e22;  /* Professional Orange */
-            --bg: #f8f9fa;
+            --primary: #d32f2f; /* Racing Red */
+            --dark: #212121;
+            --accent: #ffb300; /* Tool/Oil Yellow */
+            --bg: #ffffff;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            text-align: center;
+        body { font-family: 'Arial', sans-serif; margin: 0; background: var(--bg); color: var(--dark); text-align: center; }
+        
+        header { 
+            background: var(--dark); 
+            color: white; 
+            padding: 30px 15px; 
+            border-bottom: 5px solid var(--primary);
         }
 
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 25px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+        h1 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
+        .tagline { font-size: 0.9rem; color: var(--accent); margin-top: 5px; }
 
-        h1 { margin: 0; font-size: 1.8rem; }
-        p { margin: 5px 0 0; opacity: 0.9; }
+        .menu-container { padding: 20px; display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: auto; }
 
-        /* Categories Section */
-        .container {
+        .btn-card {
+            background: #f1f1f1;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .category-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 6px solid var(--primary);
             cursor: pointer;
-            transition: 0.3s;
-            border-left: 5px solid var(--accent);
         }
 
-        .category-card:active { transform: scale(0.98); }
+        .btn-card i { font-size: 1.4rem; color: var(--primary); }
 
-        .category-info { display: flex; align-items: center; gap: 15px; }
-        .category-info i { font-size: 1.5rem; color: var(--primary); }
-        .category-info h3 { margin: 0; font-size: 1.1rem; }
-
-        /* Gallery Overlay */
-        #gallery-overlay {
+        /* Gallery Page Styles */
+        #gallery-screen {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            overflow-y: auto;
-            padding-top: 20px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 100; overflow-y: auto;
         }
 
-        .gallery-header {
-            display: flex;
-            align-items: center;
-            padding: 0 20px 20px;
-            border-bottom: 1px solid #ddd;
+        .gallery-nav { 
+            padding: 15px; background: var(--dark); color: white; 
+            display: flex; align-items: center; position: sticky; top: 0;
         }
 
-        .back-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+        .back-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 4px; margin-right: 15px; }
 
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
-            padding: 20px;
-        }
+        .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+        .media-grid img, .media-grid video { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; }
 
-        .media-grid img, .media-grid video {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .contact-footer {
-            margin-top: 30px;
-            padding: 20px;
-            background: #eee;
+        .whatsapp-btn {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Jiyaji Aluminium Work</h1>
-        <p>Expert Fabrication & Glass Solutions</p>
-    </header>
+<header>
+    <h1>Bhanu Auto Parts</h1>
+    <div class="tagline">Genuine Spares & Expert Service</div>
+</header>
 
-    <div class="container" id="menu">
-        <div class="category-card" onclick="openGallery('aluminum-normal', 'Normal Aluminum')">
-            <div class="category-info">
-                <i class="fas fa-window-maximize"></i>
-                <h3>Aluminum Normal</h3>
-            </div>
-            <i class="fas fa-chevron-right"></i>
-        </div>
-
-        <div class="category-card" onclick="openGallery('domal-section', 'Domal Premium')">
-            <div class="category-info">
-                <i class="fas fa-door-open"></i>
-                <h3>Domal Section</h3>
-            </div>
-            <i class="fas fa-chevron-right"></i>
-        </div>
-
-        <div class="category-card" onclick="openGallery('glass-work', 'Glass & Railing')">
-            <div class="category-info">
-                <i class="fas fa-layer-group"></i>
-                <h3>Glass & Railing Work</h3>
-            </div>
-            <i class="fas fa-chevron-right"></i>
-        </div>
+<div class="menu-container">
+    <div class="btn-card" onclick="openCat('engine-parts', 'Engine & Spares')">
+        <span><i class="fas fa-cogs"></i> &nbsp; Engine & Spares</span>
+        <i class="fas fa-chevron-right"></i>
     </div>
 
-    <div id="gallery-overlay">
-        <div class="gallery-header">
-            <button class="back-btn" onclick="closeGallery()"><i class="fas fa-arrow-left"></i> Back</button>
-            <h2 id="gallery-title" style="margin-left: 20px;"></h2>
+    <div class="btn-card" onclick="openCat('service-work', 'Service & Repairing')">
+        <span><i class="fas fa-tools"></i> &nbsp; Service Photos</span>
+        <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <div class="btn-card" onclick="openCat('accessories', 'Accessories')">
+        <span><i class="fas fa-motorcycle"></i> &nbsp; Bike Accessories</span>
+        <i class="fas fa-chevron-right"></i>
+    </div>
+</div>
+
+<div id="gallery-screen">
+    <div class="gallery-nav">
+        <button class="back-btn" onclick="closeCat()">← Back</button>
+        <span id="cat-title">Gallery</span>
+    </div>
+    <div class="media-grid" id="media-content">
         </div>
-        <div class="media-grid" id="media-list">
-            </div>
-    </div>
+</div>
 
-    <div class="contact-footer">
-        <p>Hamara kaam pasand aaya? Call karein:</p>
-        <a href="tel:+919000000000" style="color: var(--accent); text-decoration: none; font-weight: bold; font-size: 1.2rem;">+91 9XXXX XXXXX</a>
-    </div>
+<a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-btn">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-    <script>
-        function openGallery(folder, title) {
-            document.getElementById('gallery-overlay').style.display = 'block';
-            document.getElementById('gallery-title').innerText = title;
-            
-            const mediaList = document.getElementById('media-list');
-            mediaList.innerHTML = '<p>Loading photos...</p>';
+<script>
+    function openCat(folder, title) {
+        document.getElementById('gallery-screen').style.display = 'block';
+        document.getElementById('cat-title').innerText = title;
+        
+        let content = document.getElementById('media-content');
+        content.innerHTML = ''; 
 
-            // IMPORTANT: List your actual filenames here for each category
-            let files = [];
-            if(folder === 'aluminum-normal') {
-                files = ['img1.jpg', 'vid1.mp4']; // Add your actual names
-            } else if(folder === 'domal-section') {
-                files = ['domal1.jpg', 'domal2.jpg']; 
-            } else if(folder === 'glass-work') {
-                files = ['glass1.jpg'];
+        // List of files (Aap apne hisab se file names yahan badal lo)
+        let files = [];
+        if(folder === 'engine-parts') {
+            files = ['part1.jpg', 'part2.jpg']; 
+        } else if(folder === 'service-work') {
+            files = ['service1.mp4', 'service2.jpg'];
+        } else if(folder === 'accessories') {
+            files = ['acc1.jpg'];
+        }
+
+        files.forEach(file => {
+            let path = `assets/${folder}/${file}`;
+            if(file.includes('.mp4')) {
+                content.innerHTML += `<video controls src="${path}"></video>`;
+            } else {
+                content.innerHTML += `<img src="${path}" onclick="window.open('${path}')">`;
             }
+        });
+    }
 
-            mediaList.innerHTML = ''; 
-            files.forEach(file => {
-                const path = `assets/${folder}/${file}`;
-                if(file.toLowerCase().endsWith('.mp4')) {
-                    mediaList.innerHTML += `<video controls><source src="${path}" type="video/mp4"></video>`;
-                } else {
-                    mediaList.innerHTML += `<img src="${path}" alt="work">`;
-                }
-            });
-        }
+    function closeCat() {
+        document.getElementById('gallery-screen').style.display = 'none';
+    }
+</script>
 
-        function closeGallery() {
-            document.getElementById('gallery-overlay').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
