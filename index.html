@@ -1,98 +1,81 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhanu Auto Parts - Digital Catalog</title>
+    <title>Jiyaji Aluminium Fabrication</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #001f3f; color: white; text-align: center; }
-        .page { display: none; padding: 15px; min-height: 100vh; }
-        .active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin-bottom: 20px; border: 2px solid #ff8c00; }
-        
-        .btn-container { display: grid; gap: 15px; padding: 10px 20px; max-width: 400px; margin: 0 auto; }
-        
-        button { 
-            padding: 16px; font-size: 18px; cursor: pointer; border: none; border-radius: 8px; 
-            background: linear-gradient(45deg, #ff8c00, #ff5500); color: white; 
-            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        button:active { transform: scale(0.98); }
-        .back-btn { background: #444; margin-top: 20px; width: 80%; max-width: 300px; }
-        
-        .login-box { 
-            margin-top: 50px; padding: 30px; background: rgba(255,255,255,0.1); 
-            border-radius: 15px; display: inline-block; width: 85%; max-width: 350px;
-        }
-        
-        input { 
-            padding: 15px; width: 90%; margin-bottom: 20px; border-radius: 8px; 
-            border: none; font-size: 16px; outline: none; text-align: center;
-        }
-        
-        h2 { color: #ff8c00; margin-bottom: 5px; }
-        p { margin-bottom: 25px; opacity: 0.8; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; text-align: center; }
+        h1 { color: #333; }
+        .category-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 250px; cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: scale(1.05); }
+        .card img { width: 100%; border-radius: 10px; }
+        .gallery { display: none; margin-top: 20px; background: white; padding: 20px; border-radius: 15px; }
+        .gallery img, .gallery video { width: 90%; max-width: 400px; margin: 10px; border-radius: 10px; border: 2px solid #ddd; }
+        .back-btn { background: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="loginPage" class="page active">
-        <div class="login-box">
-            <img src="logo.jpg" style="border:none; box-shadow:none; max-width:150px;" alt="Bhanu Logo">
-            <h2>BHANU AUTO PARTS</h2>
-            <p>Please Login to View Catalog</p>
-            <input type="tel" id="mobile" placeholder="Mobile Number (10 Digit)" maxlength="10">
-            <button style="width:100%" onclick="login()">LOGIN</button>
+    <h1>Jiyaji Aluminium & Glass Work</h1>
+    <p>Scanner scan karke hamara kaam dekhein</p>
+
+    <div id="main-menu" class="category-container">
+        <div class="card" onclick="showGallery('aluminum-normal')">
+            <img src="assets/aluminum-normal/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Aluminum+Normal'">
+            <h3>Aluminum Normal</h3>
+        </div>
+        <div class="card" onclick="showGallery('domal-section')">
+            <img src="assets/domal-section/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Domal+Section'">
+            <h3>Domal Section</h3>
+        </div>
+        <div class="card" onclick="showGallery('glass-work')">
+            <img src="assets/glass-work/photo1.jpg" onerror="this.src='https://via.placeholder.com/150?text=Glass+Work'">
+            <h3>Glass & Railing</h3>
         </div>
     </div>
 
-    <div id="homePage" class="page">
-        <img src="main_poster.jpg" alt="Bhanu Auto Services">
-        <div class="btn-container">
-            <button onclick="showPage('batteryPage')">🔋 Batteries</button>
-            <button onclick="showPage('tyrePage')">🛞 Tyres</button>
-            <button onclick="showPage('oilPage')">🛢️ Engine Oil</button>
-        </div>
-        <p style="margin-top:20px; font-size:12px;">© 35 Salo Se Aapki Seva Mein</p>
-    </div>
-
-    <div id="batteryPage" class="page">
-        <h2>Our Battery Brands</h2>
-        <img src="battery_showcase.jpg" alt="Battery Brands">
-        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
-    </div>
-
-    <div id="tyrePage" class="page">
-        <h2>Premium Tyre Brands</h2>
-        <img src="tyre_showcase.jpg" alt="Tyre Brands">
-        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
-    </div>
-
-    <div id="oilPage" class="page">
-        <h2>Engine Oils & Lubricants</h2>
-        <img src="oil_showcase.jpg" alt="Oil Brands">
-        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
+    <div id="gallery-view" class="gallery">
+        <button class="back-btn" onclick="goBack()">← Back to Menu</button>
+        <h2 id="gallery-title"></h2>
+        <div id="media-list">
+            </div>
     </div>
 
     <script>
-        function login() {
-            let num = document.getElementById('mobile').value;
-            if(num.length === 10) {
-                showPage('homePage');
-            } else {
-                alert('Kripya sahi mobile number daalein (10 digits)');
+        function showGallery(category) {
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('gallery-view').style.display = 'block';
+            document.getElementById('gallery-title').innerText = category.replace('-', ' ').toUpperCase();
+            
+            let mediaList = document.getElementById('media-list');
+            mediaList.innerHTML = ''; // Pehle wala saaf karein
+
+            // Yahan aapko apni file ke naam likhne honge jo aapne upload kiye hain
+            let files = [];
+            if(category === 'aluminum-normal') {
+                files = ['normal-1.jpg', 'normal-2.mp4']; // Example names
+            } else if(category === 'domal-section') {
+                files = ['domal-1.jpg', 'domal-2.jpg'];
+            } else if(category === 'glass-work') {
+                files = ['glass-1.jpg', 'glass-video.mp4'];
             }
+
+            files.forEach(file => {
+                let path = `assets/${category}/${file}`;
+                if(file.endsWith('.mp4')) {
+                    mediaList.innerHTML += `<video controls src="${path}"></video>`;
+                } else {
+                    mediaList.innerHTML += `<img src="${path}">`;
+                }
+            });
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+        function goBack() {
+            document.getElementById('main-menu').style.display = 'flex';
+            document.getElementById('gallery-view').style.display = 'none';
         }
     </script>
 </body>
-              </html>
+</html>
