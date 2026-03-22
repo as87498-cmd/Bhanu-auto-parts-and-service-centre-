@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhanu Auto Parts - Digital Catalog</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #001f3f; color: white; text-align: center; }
+        .page { display: none; padding: 15px; min-height: 100vh; }
+        .active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin-bottom: 20px; border: 2px solid #ff8c00; }
+        
+        .btn-container { display: grid; gap: 15px; padding: 10px 20px; max-width: 400px; margin: 0 auto; }
+        
+        button { 
+            padding: 16px; font-size: 18px; cursor: pointer; border: none; border-radius: 8px; 
+            background: linear-gradient(45deg, #ff8c00, #ff5500); color: white; 
+            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        button:active { transform: scale(0.98); }
+        .back-btn { background: #444; margin-top: 20px; width: 80%; max-width: 300px; }
+        
+        .login-box { 
+            margin-top: 50px; padding: 30px; background: rgba(255,255,255,0.1); 
+            border-radius: 15px; display: inline-block; width: 85%; max-width: 350px;
+        }
+        
+        input { 
+            padding: 15px; width: 90%; margin-bottom: 20px; border-radius: 8px; 
+            border: none; font-size: 16px; outline: none; text-align: center;
+        }
+        
+        h2 { color: #ff8c00; margin-bottom: 5px; }
+        p { margin-bottom: 25px; opacity: 0.8; }
+    </style>
+</head>
+<body>
 
+    <div id="loginPage" class="page active">
+        <div class="login-box">
+            <img src="logo.jpg" style="border:none; box-shadow:none; max-width:150px;" alt="Bhanu Logo">
+            <h2>BHANU AUTO PARTS</h2>
+            <p>Please Login to View Catalog</p>
+            <input type="tel" id="mobile" placeholder="Mobile Number (10 Digit)" maxlength="10">
+            <button style="width:100%" onclick="login()">LOGIN</button>
+        </div>
+    </div>
+
+    <div id="homePage" class="page">
+        <img src="main_poster.jpg" alt="Bhanu Auto Services">
+        <div class="btn-container">
+            <button onclick="showPage('batteryPage')">🔋 Batteries</button>
+            <button onclick="showPage('tyrePage')">🛞 Tyres</button>
+            <button onclick="showPage('oilPage')">🛢️ Engine Oil</button>
+        </div>
+        <p style="margin-top:20px; font-size:12px;">© 35 Salo Se Aapki Seva Mein</p>
+    </div>
+
+    <div id="batteryPage" class="page">
+        <h2>Our Battery Brands</h2>
+        <img src="battery_showcase.jpg" alt="Battery Brands">
+        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
+    </div>
+
+    <div id="tyrePage" class="page">
+        <h2>Premium Tyre Brands</h2>
+        <img src="tyre_showcase.jpg" alt="Tyre Brands">
+        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
+    </div>
+
+    <div id="oilPage" class="page">
+        <h2>Engine Oils & Lubricants</h2>
+        <img src="oil_showcase.jpg" alt="Oil Brands">
+        <button class="back-btn" onclick="showPage('homePage')">← Back to Menu</button>
+    </div>
+
+    <script>
+        function login() {
+            let num = document.getElementById('mobile').value;
+            if(num.length === 10) {
+                showPage('homePage');
+            } else {
+                alert('Kripya sahi mobile number daalein (10 digits)');
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+              </html>
